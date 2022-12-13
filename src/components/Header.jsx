@@ -1,8 +1,7 @@
 import logo from "../images/image_logo.png"
 export default function Header() {
   return (
-    <div className="container mx-auto">
-        <div className="h-18 bg-gradient-to-r from-violet-500 to-fuchsia-500">
+        <div className="h-18 bg-gradient-to-r from-violet-500 to-fuchsia-500 mt-8">
             <div class="flex flex-row">
                 <div className="basis-1/8 text-white ml-3 my-1" >
                     <img src={logo} alt="" className="logo mr-3" />
@@ -15,6 +14,5 @@ export default function Header() {
                 </div>
             </div>
         </div>
-    </div>
   );
 }
