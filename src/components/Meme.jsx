@@ -1,5 +1,4 @@
 import React from "react";
-import memesData from "../MemesData.js";
 
 export default function Meme() {
   const [meme, setMeme] = React.useState({
@@ -8,13 +7,19 @@ export default function Meme() {
     randomImage:
       "https://i.kym-cdn.com/entries/icons/original/000/041/399/cover1.jpg",
   });
+  const [allMemes, setAllMemes] = React.useState();
 
-  const [allMemeImages, setAllMemeImages] = React.useState(memesData);
+  React.useEffect(async() => {
+    const response = await fetch("https://api.imgflip.com/get_memes")
+      const data = await response.json()
+       setAllMemes(data.data.memes)
+  }, [])
+  
 
   function getMemeImage() {
-    const memesArray = allMemeImages.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
+    
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url;
     setMeme((prevMeme) => ({
       ...prevMeme,
       randomImage: url,
@@ -22,13 +27,13 @@ export default function Meme() {
   }
 
   function handleChange(event) {
-    const {name, value} = event.target
-    setMeme(prevMeme => ({
-        ...prevMeme,
-        [name]: value
-    }))
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
   }
-  
+
   return (
     <div className="bg-slate-200 pt-8">
       <div className="flex flex-row mb-5">
@@ -61,13 +66,15 @@ export default function Meme() {
           Get a new meme image
         </button>
       </div>
-      <div className="flex justify-center memeImages" style={{backgroundImage: `url(${meme.randomImage})`,}} >
-        <div className="top-text bg-white ">
-          <p className="text-6xl text-black text-center">{meme.topText} </p>
+      <div className="flex justify-center relative  text-wrap">
+        <div>
+          <img src={meme.randomImage} className="memeImages" />
         </div>
-        <div className="bottom-text bg-white ">
-          <p className="text-6xl text-black text-center">{meme.bottomText} </p>
-          
+        <div className="top-text">
+          <p className="text-6xl text-black text-center stroke">{meme.topText} </p>
+        </div>
+        <div className="bottom-text">
+          <p className="text-6xl text-black text-center stroke">{meme.bottomText} </p>
         </div>
       </div>
     </div>
