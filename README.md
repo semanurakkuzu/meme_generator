@@ -1,4 +1,4 @@
-# Meme Generator React and Tailwind
+# Meme Generator with React and Tailwind
 
 ![meme_project](https://user-images.githubusercontent.com/110597975/209092253-2348936e-e8e1-4e4a-801c-d79af67cd785.png)
 
